@@ -1,0 +1,27 @@
+{
+    "framework": "deepkit",
+    "tests": [
+      {
+        "default": {
+          "json_url": "/json",
+          "db_url": "/db",
+          "query_url": "/queries?queries=",
+          "fortune_url": "/fortunes",
+          "update_url": "/updates?queries=",
+          "plaintext_url": "/plaintext",
+          "cached_query_url": "/cached-worlds?count=",
+          "port": 8080,
+          "approach": "Realistic",
+          "classification": "Micro",
+          "framework": "deepkit",
+          "language": "TypeScript",
+          "os": "Linux",
+          "orm": "Full",
+          "database": "Postgres",
+          "database_os": "Linux",
+          "display_name": "deepkit",
+          "versus": "nodejs"
+        }
+      }
+    ]
+  }

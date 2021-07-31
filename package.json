@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "@deepkit/framework": "^1.0.1-alpha.40",
     "hbs": "^4.0.4",
     "pg": "^8.6.0",
     "pg-native": "^3.0.0"
