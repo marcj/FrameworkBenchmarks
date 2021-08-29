@@ -1,11 +1,11 @@
-import { injectable } from "@deepkit/injector";
-import { PatchResult } from "@deepkit/orm";
-import { PostgresDatabase } from "./postgres.database";
-import { World } from "./world.entity";
+import { injectable } from '@deepkit/injector';
+import { PatchResult } from '@deepkit/orm';
+import { World } from './world.entity';
+import { AppDatabase } from './database';
 
-@injectable()
+@injectable
 export class WorldService {
-  constructor(private readonly postgresDb: PostgresDatabase) {}
+  constructor(private readonly database: AppDatabase) {}
 
   private getRandomWorldId() {
     return Math.floor(Math.random() * 10000) + 1;
@@ -16,7 +16,7 @@ export class WorldService {
   }
 
   private updateRandomWorld(): Promise<PatchResult<World>> {
-    return this.postgresDb
+    return this.database
       .query(World)
       .filter({ id: this.getRandomWorldId() })
       .returning("id", "randomnumber")
@@ -24,9 +24,10 @@ export class WorldService {
   }
 
   public async getSingleRandomWorld() {
-    return this.postgresDb
+    return this.database
       .query(World)
       .filter({ id: this.getRandomWorldId() })
+      .disableChangeDetection()
       .findOne();
   }
 
@@ -54,6 +55,6 @@ export class WorldService {
     const updatedWorlds = await (
       await Promise.all(promises)
     ).map((x) => x.returning);
-    return updatedWorlds;
+    return updatedWorlds as any; //lol
   }
 }

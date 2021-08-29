@@ -1,11 +1,10 @@
-import { toFastProperties } from "@deepkit/core";
-import { http, HttpResponse, JSONResponse } from "@deepkit/http";
-import { FortuneService } from "./fortune.service";
-import { Fortunes } from "./fortunes";
-import { WorldService } from "./world.service";
+import { http, HttpResponse } from '@deepkit/http';
+import { FortuneService } from './fortune.service';
+import { Fortunes } from './fortunes';
+import { WorldService } from './world.service';
 
-@http.controller("")
-export class SqlController {
+@http.controller()
+export class HttpController {
   constructor(
     private readonly worldService: WorldService,
     private readonly fortuneService: FortuneService

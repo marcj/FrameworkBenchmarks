@@ -14,7 +14,6 @@ COPY ./ ./
 RUN npm run build
 
 ENV NODE_ENV production
-# ENV DATABASE_CONFIGURATION_PROFILE postgres
-# ENV FRAMEWORK express
+ENV DATABASE_CONFIGURATION_PROFILE mongodb
 
 CMD ["node", "dist/main", "server:start"]

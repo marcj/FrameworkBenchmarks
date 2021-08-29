@@ -1,22 +1,29 @@
-import "reflect-metadata";
-import { Application, KernelModule } from "@deepkit/framework";
-import { SqlController } from "./sql/sql.controller";
-import { cpus } from "os";
-import { ServerHeaderListener } from "./common/server-header.listener";
-import { PostgresDatabase } from "./sql/postgres.database";
-import { WorldService } from "./sql/world.service";
-import { FortuneService } from "./sql/fortune.service";
+import 'reflect-metadata';
+import { Application, FrameworkModule } from '@deepkit/framework';
+import { HttpController }  from './http.controller';
+import { cpus } from 'os';
+import { ServerHeaderListener } from './common/server-header.listener';
+import { PostgresDatabase } from './database.postgres';
+import { WorldService } from './world.service';
+import { FortuneService } from './fortune.service';
+import { MongoDatabase } from './database.mongodb';
+import { AppDatabase } from './database';
 
-Application.create({
-  controllers: [SqlController],
+new Application({
+  controllers: [HttpController],
   listeners: [ServerHeaderListener],
-  providers: [WorldService, FortuneService],
+  providers: [
+    WorldService,
+    FortuneService,
+    {provide: AppDatabase, useClass: process.env.DATABASE_CONFIGURATION_PROFILE === 'mongodb' ? MongoDatabase : PostgresDatabase},
+    HttpController
+  ],
   imports: [
-    KernelModule.configure({
+    new FrameworkModule({
       host: "0.0.0.0",
-      workers: cpus().length,
-      databases: [PostgresDatabase],
+      workers: cpus().length-1,
+      httpLog: false,
       migrateOnStartup: false,
     }),
   ],
-}).run();
+}).run().catch(console.error);

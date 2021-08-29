@@ -20,6 +20,25 @@
         "database_os": "Linux",
         "display_name": "deepkit",
         "versus": "nodejs"
+      },
+      "mongo": {
+        "json_url": "/json",
+        "plaintext_url": "/plaintext",
+        "db_url": "/db",
+        "query_url": "/queries?queries=",
+        "update_url": "/updates?queries=",
+        "fortune_url": "/fortunes",
+        "port": 8080,
+        "approach": "Realistic",
+        "classification": "Micro",
+        "framework": "deepkit",
+        "language": "TypeScript",
+        "os": "Linux",
+        "orm": "Full",
+        "database": "MongoDB",
+        "database_os": "Linux",
+        "display_name": "deepkit",
+        "versus": "nodejs"
       }
     }
   ]
